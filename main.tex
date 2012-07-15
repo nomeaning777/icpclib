@@ -1,0 +1,38 @@
+\documentclass[a4j]{jarticle}
+
+\usepackage{color}
+\usepackage{ascmac}
+\usepackage{here}
+\usepackage{txfonts}
+\usepackage{listings,jlisting}
+\renewcommand{\lstlistingname}{リスト}
+\lstset{%
+  frame=single,
+  backgroundcolor={\color[gray]{.95}},
+  stringstyle={\ttfamily \color[rgb]{0.63,0.08,0.08}},
+  commentstyle={\itshape \color[rgb]{0,0.5,0}},
+  identifierstyle={\ttfamily}, 
+  keywordstyle={\ttfamily \color[rgb]{0,0,1}},
+  basicstyle={\ttfamily},
+  breaklines=true,
+  xleftmargin=0zw,
+  xrightmargin=0zw,
+  framerule=.2pt,
+  columns=[l]{fullflexible},
+  numbers=left,
+  stepnumber=1,
+  numberstyle={\scriptsize},
+  numbersep=1em,
+  lineskip=-0.5zw,
+  morecomment={[s][{\color[cmyk]{1,0,0,0}}]{/**}{*/}},
+}
+
+\begin{document}
+  % 目次ページの作成
+  \markright{The University of Electro Communications}
+  \pagestyle{myheadings}
+  \tableofcontents
+  \newpage
+  
+  \input{lib.tex}
+\end{document}

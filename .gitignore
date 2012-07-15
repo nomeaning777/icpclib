@@ -1,0 +1,8 @@
+lib.tex
+*.pdf
+*.dvi
+*.log
+*.ps
+*.toc
+*.aux
+
