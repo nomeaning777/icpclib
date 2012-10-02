@@ -4,9 +4,9 @@ LATEX = platex
 DVIPDF = dvipdf
 
 all: $(LIB)
-	platex main
-	platex main
-	dvipdf main.dvi
+	uplatex main
+	uplatex main
+	dvipdfmx main.dvi
 $(LIB):
 	ruby makelib.rb
 

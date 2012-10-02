@@ -1,20 +1,33 @@
 # -*- coding:utf-8 -*-
 require 'open-uri'
+require 'mechanize'
 
-INDEX_URL = "http://wiki.mma.club.uec.ac.jp/nomeaning/" # メニューページのURL
+INDEX_URL = "" # メニューページのURL
 TARGET_FILE = File.dirname(__FILE__) + "/lib.tex"
 WAIT_TIME = 120
 RETRY_COUNT = 10
+USER = ""
+PASSWORD = ""
+LOGIN_URL = "http://k8n.biz/wiki/?action=login"
+
+@agent = Mechanize.new
+if USER != nil && USER != "" 
+  @agent.get('http://k8n.biz/wiki/?action=login')
+  @agent.page.form_with(:id => 'loginform') do |form|
+    form.field_with(:name => 'name').value = USER
+    form.field_with(:name => 'password').value = PASSWORD
+    form.click_button
+  end
+end
+
 
 def get_url(url)
   retry_count = 0
   res=[]
   url=URI.encode(url)
   begin
-    open(url+"?action=raw", "User-Agent" => "libmake",) do |f|
-      f.each_line do |line|
+    @agent.get(url + '?action=raw').body.force_encoding('UTF-8').each_line do |line|
         res<<=line
-      end
     end
   rescue => e
     p e
@@ -33,7 +46,7 @@ def get_url(url)
   return res
 end
 
-$file = File::open(TARGET_FILE, "w:euc-jp")
+$file = File::open(TARGET_FILE, 'w') #, "w:euc-jp")
 
 def texEncode(strc)
   str=strc.dup()
